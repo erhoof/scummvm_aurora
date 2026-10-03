@@ -89,3 +89,31 @@
   Copy current config.guess/config.sub from pristine SDL into extracted libmad
   and libmpeg2 build trees; upstream dependency tarballs and libsdl unchanged.
 - Restarted aarch64 build with corrected detection helpers.
+
+## aarch64 compile and packaging
+
+- All 125 enabled engines compiled and executable linked successfully.
+- First install attempt assumed SDL prefix/lib; aarch64 CMake uses prefix/lib64.
+  Use RPM %{_lib} for the SDL runtime source path, preserving private package
+  destination /usr/share/ru.erhoof.scummvm/lib on both architectures.
+- User confirms three-finger tap opens keyboard. Main menu is Ctrl+F5 via
+  keyboard; no dedicated menu touch gesture exists in current SDL backend.
+
+## Signed aarch64 RPM / final armv7hl rebuild
+
+- Release 5 aarch64 build completed. SDK signature verified; sfdk check selects
+  regular profile and returns success. Same generic rpmlint private-library
+  advisories as armv7hl, no Aurora dependency validation errors.
+- SDK clears top-level RPMS artifacts when switching targets. Build script now
+  preserves validated packages in artifacts/ (OUTPUT_DIR override), before deploy.
+- Saved signed aarch64 RPM and started release 5 armv7hl build/sign/check/deploy.
+
+## Release 5 completion
+
+- Both architecture RPMs built, signed, signature verified and validated with
+  regular profile. sfdk check returns 0 for each; generic rpmlint advisories
+  about private-library placement remain treated as warnings by SDK policy.
+- Preserved both signed packages in artifacts/. armv7hl deployed to
+  defaultuser@192.168.1.247; sdk-deploy-rpm reports Installation successful.
+- Final revised icons from Untitled (56).zip included in both packages.
+- aarch64 device execution not tested: supplied tablet has armv7hl userspace.

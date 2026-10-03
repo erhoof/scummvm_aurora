@@ -11,8 +11,8 @@ See [render pipeline](research/render_pipeline.md). Existing GLES texture rotati
 - [x] Inspect platform, graphics, input and packaging.
 - [x] Aurora platform changes and RPM/build script; see work/stage_01_platform.md.
 - [x] Build 125 available engines, including Gamos; Watchmaker requires desktop OpenGL.
-- [x] SDK signature verified; regular rpm-validator and sfdk check return success.
-- [x] Release 1 installed; both games copied; device detects gamos:pilots1.
+- [x] Release 5 signatures verified; regular validation and sfdk check succeed for both architectures.
+- [x] Release 5 armv7hl installed; both games copied; device detects gamos:pilots1.
 - [ ] Device checks: OpenGL, rotation/touch, background audio, compositor close.
 
 ## Device
@@ -37,5 +37,7 @@ Russian release. Copied to `~/Documents/PILOTS`; use that directory for gameplay
 ## Release 5 icons / architecture builds
 
 Revised icons from Untitled (56).zip installed in all four sizes. Previous
-release 4 armv7hl signed, validated and deployed. Release 5 aarch64 building
-with refreshed Autotools architecture helpers; armv7hl rebuild/deploy follows.
+release 4 armv7hl signed, validated and deployed. Release 5 aarch64 signed and validated, preserved in artifacts/.
+Release 5 armv7hl signed, validated and installed successfully. Both RPMs
+are preserved in artifacts/. Virtual keyboard three-finger gesture confirmed
+by user; main menu uses Ctrl+F5. Rotation hint/audio close still await user feedback.

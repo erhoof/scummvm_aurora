@@ -114,7 +114,7 @@ install -D -m0755 build/%{_arch}/scummvm/%{name} %{buildroot}%{_bindir}/%{name}
 patchelf --force-rpath --set-rpath %{_datadir}/%{name}/lib %{buildroot}%{_bindir}/%{name}
 # Private libraries: exclude their Requires/Provides above and resolve them
 # through the application RPATH. Copy only each runtime SONAME.
-install -D -m0755 build/%{_arch}/sdl-install/lib/libSDL2-2.0.so.0 -t %{buildroot}%{_datadir}/%{name}/lib/
+install -D -m0755 build/%{_arch}/sdl-install/%{_lib}/libSDL2-2.0.so.0 -t %{buildroot}%{_datadir}/%{name}/lib/
 for lib in libFLAC.so.12 libfreetype.so.6 libfribidi.so.0 libjpeg.so.62 libtheoradec.so.1 libvpx.so.9 libbz2.so.1; do
   install -D -m0755 %{_libdir}/$lib -t %{buildroot}%{_datadir}/%{name}/lib/
   patchelf --force-rpath --set-rpath %{_datadir}/%{name}/lib %{buildroot}%{_datadir}/%{name}/lib/$lib

@@ -11,6 +11,7 @@ SIGNING_CERT="${SIGNING_CERT:-$SDK_ROOT/package-signing/regular_cert.pem}"
 DEVICE_HOST="${DEVICE_HOST:-192.168.1.247}"
 DEVICE_USER="${DEVICE_USER:-defaultuser}"
 DEVICE_KEY="${DEVICE_KEY:-$HOME/.ssh/id_rsa_no_key}"
+OUTPUT_DIR="${OUTPUT_DIR:-$PWD/artifacts}"
 SIGN=0
 DEPLOY=0
 for arg in "$@"; do
@@ -25,6 +26,10 @@ if [ "$SIGN" = 1 ]; then
   "$SFDK" engine exec rpmsign-external verify "$PWD/$RPM"
 fi
 "$SFDK" -c "target=$TARGET" check "$RPM" 2>&1 | tee "work/check-$ARCH.log"
+# sfdk clears previous RPMs when switching targets. Preserve validated output.
+mkdir -p "$OUTPUT_DIR"
+cp -p "$RPM" "$OUTPUT_DIR/$(basename "$RPM")"
+RPM="$OUTPUT_DIR/$(basename "$RPM")"
 if [ "$DEPLOY" = 1 ]; then
   scp -O -i "$DEVICE_KEY" "$RPM" "$DEVICE_USER@$DEVICE_HOST:$(basename "$RPM")"
   ssh -i "$DEVICE_KEY" "$DEVICE_USER@$DEVICE_HOST" "sdk-deploy-rpm --silent --keepUserData '/home/$DEVICE_USER/$(basename "$RPM")'"

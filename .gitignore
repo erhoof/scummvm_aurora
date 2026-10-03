@@ -320,6 +320,7 @@ CLAUDE.md
 # Aurora build products and local SDK state
 /build/
 /RPMS/
+/artifacts/
 /.sfdk/
 /documentation.list
 /work/*.log

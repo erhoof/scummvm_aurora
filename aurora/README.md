@@ -9,7 +9,9 @@ Build, sign and validate either architecture:
 
 Add `--deploy` to install on defaultuser@192.168.1.247. Defaults are in
 `port_config.json`; build_sign.sh accepts SDK_ROOT, SFDK, TARGET, DEVICE_HOST,
-DEVICE_USER, DEVICE_KEY, SIGNING_KEY and SIGNING_CERT overrides.
+DEVICE_USER, DEVICE_KEY, SIGNING_KEY, SIGNING_CERT and OUTPUT_DIR overrides.
+Validated RPMs are preserved in `artifacts/` so building the second architecture
+does not remove the first package.
 
 The launcher name is ScummVM, app ID ru.erhoof.scummvm. Runtime config and
 saves are under `~/.local/share/ru.erhoof/scummvm`; logs are under
@@ -42,3 +44,7 @@ Device checks: launcher and game visible in both landscape directions; taps alig
 with controls; audio stops when minimized and resumes after restoring; closing
 the app card removes the process and permits a fresh launch. Device visual
 checks are performed by the user; screenshots require root on this tablet.
+
+Touch shortcuts: a quick three-finger tap opens ScummVM's bundled virtual
+keyboard (confirmed on tablet). To open the main menu, use Ctrl+F5 on that
+keyboard. This SDL backend has no dedicated touch gesture for the menu.
