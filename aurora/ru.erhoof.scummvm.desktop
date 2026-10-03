@@ -1,0 +1,17 @@
+[Desktop Entry]
+Name=ScummVM
+Comment=Adventure game interpreter
+Exec=/usr/bin/ru.erhoof.scummvm
+Icon=ru.erhoof.scummvm
+Type=Application
+Categories=Game;AdventureGame;
+X-Nemo-Application-Type=no-invoker
+
+[X-Application]
+Permissions=UserDirs;RemovableMedia;Internet;Audio
+OrganizationName=ru.erhoof
+ApplicationName=scummvm
+
+[X-Aurora-Application]
+Orientation=LandscapeInverted;Landscape
+IconMode=Crop

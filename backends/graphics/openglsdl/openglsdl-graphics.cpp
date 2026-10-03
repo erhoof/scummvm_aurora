@@ -20,6 +20,17 @@
  */
 
 #include "backends/graphics/openglsdl/openglsdl-graphics.h"
+#ifdef AURORA_OS
+#include "backends/platform/sdl/sailfish/sailfish-window.h"
+
+bool OpenGLSdlGraphicsManager::setRotationMode(Common::RotationMode rotation) {
+	SdlGraphicsManager::setRotationMode(rotation);
+	static_cast<SdlWindow_Sailfish *>(_window)->setBufferRotation(rotation);
+	if (_windowWidth && _windowHeight)
+		handleResize(_windowWidth, _windowHeight);
+	return true;
+}
+#endif
 #include "backends/graphics/opengl/texture.h"
 #include "backends/events/sdl/sdl-events.h"
 #include "backends/platform/sdl/sdl.h"
@@ -89,7 +100,11 @@ OpenGLSdlGraphicsManager::OpenGLSdlGraphicsManager(SdlEventSource *eventSource, 
 		DEFAULT_GLES_MAJOR = 1,
 		DEFAULT_GLES_MINOR = 1,
 
+#ifdef AURORA_OS
+		DEFAULT_GLES2_MAJOR = 3,
+#else
 		DEFAULT_GLES2_MAJOR = 2,
+#endif
 		DEFAULT_GLES2_MINOR = 0
 	};
 

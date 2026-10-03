@@ -2021,6 +2021,12 @@ void OpenGLGraphicsManager::updateTextureSettings() {
 		_overlay->enableLinearFiltering(_currentState.filtering);
 		_overlay->setRotation(_rotationMode);
 	}
+#if defined(AURORA_OS) && defined(USE_OSD)
+	if (_osdMessageSurface)
+		_osdMessageSurface->setRotation(_rotationMode);
+	if (_osdIconSurface)
+		_osdIconSurface->setRotation(_rotationMode);
+#endif
 }
 
 #ifdef USE_OSD

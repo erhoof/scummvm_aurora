@@ -23,10 +23,17 @@
 #define BACKENDS_PLATFORM_SDL_MACOSX_MACOSX_WINDOW_H
 
 #include "backends/platform/sdl/sdl-window.h"
+#ifdef AURORA_OS
+#include "common/rotationmode.h"
+#endif
 
 class SdlWindow_Sailfish final : public SdlWindow {
 public:
 	bool createOrUpdateWindow(int, int, uint32 flags) override;
+#ifdef AURORA_OS
+	static Common::RotationMode displayRotation(int displayIndex);
+	void setBufferRotation(Common::RotationMode rotation);
+#endif
 };
 
 #endif

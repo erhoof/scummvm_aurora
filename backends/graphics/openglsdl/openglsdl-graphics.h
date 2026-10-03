@@ -40,6 +40,9 @@ public:
 
 	void initSize(uint w, uint h, const Graphics::PixelFormat *format) override;
 	void updateScreen() override;
+#ifdef AURORA_OS
+	bool setRotationMode(Common::RotationMode rotation) override;
+#endif
 
 	float getHiDPIScreenFactor() const override;
 

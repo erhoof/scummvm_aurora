@@ -1981,9 +1981,15 @@ samsungtv)
 sailfish)
         _host_os=linux
 	test "x$prefix" = xNONE && prefix=/usr
+	if test "$SCUMMVM_AURORA" = 1; then
+		datarootdir='/usr/share/ru.erhoof.scummvm'
+		datadir='${datarootdir}/data'
+		docdir='${datarootdir}/doc'
+	else
 	datarootdir='/usr/share/org.scummvm.scummvm'
 	datadir='${datarootdir}/scummvm'
 	docdir='/usr/share/org.scummvm.scummvm/doc/scummvm'
+	fi
 	# Use static libraries on Sailfish. Sailfish limits our
 	# ability to link with libraries from other packages. And if we ship
 	# dynamic library but always load it and no one else uses it, then we're
@@ -4207,9 +4213,15 @@ if test -n "$_host"; then
 			;;
 		sailfish)
                         append_var DEFINES "-DSAILFISH"
+			if test "$SCUMMVM_AURORA" = 1; then
+				append_var DEFINES "-DAURORA_OS -DWL_EGL_PLATFORM"
+				append_var LDFLAGS "-Wl,-rpath,/usr/share/ru.erhoof.scummvm/lib"
+				HOSTEXEPRE=ru.erhoof.
+			else
                         append_var LDFLAGS "-Wl,-rpath,/usr/share/org.scummvm.scummvm/lib"
-                        _vkeybd=yes
                         HOSTEXEPRE=org.scummvm.
+			fi
+                        _vkeybd=yes
 			_backend="sailfish"
                         add_line_to_config_mk 'SAILFISH = 1'
                         ;;

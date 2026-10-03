@@ -316,3 +316,11 @@ __pycache__/
 #Ignore Claude instruction files
 CLAUDE.md
 .claude
+
+# Aurora build products and local SDK state
+/build/
+/RPMS/
+/.sfdk/
+/documentation.list
+/work/*.log
+!/build_sign.sh

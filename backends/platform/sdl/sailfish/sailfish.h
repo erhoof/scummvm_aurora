@@ -31,6 +31,9 @@ public:
 	bool hasFeature(Feature f) override;
 
 protected:
+#if defined(AURORA_OS) && defined(USE_MULTIPLE_RENDERERS)
+	GraphicsManagerType getDefaultGraphicsManager() const override { return GraphicsManagerOpenGL; }
+#endif
 	Common::Path getDefaultConfigFileName() override;
 	Common::Path getDefaultLogFileName() override;
 
