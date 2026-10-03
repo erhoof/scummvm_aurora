@@ -72,3 +72,20 @@
   ScummVM 90° maps to transform 270°. Image/touch mappings unchanged.
 - Renderer and compositor hint quarter turns must be inverse with ScummVM's
   existing renderer; the guide's equal-angle rule assumes its own FBO convention.
+
+## Launcher icons and both architectures
+
+- Supplied Untitled (55).zip contains exact 86/108/128/172 square PNG sizes.
+  Copied unchanged into aurora/icon_SIZE.png; spec installs them as app icons.
+- Release 4 armv7hl built, signed, validated and installed successfully on tablet.
+- User requested both architectures; aarch64 build/sign/validation started.
+  Existing tablet is 32-bit userspace, so only armv7hl is installed there.
+
+## Revised icons / aarch64 dependency detection
+
+- User replaced icon archive with Untitled (56).zip. All four original-size PNGs
+  copied unchanged, replacing release 4 icons. Release 5 packages these icons.
+- First aarch64 attempt failed in libmad's old config.guess (aarch64 unknown).
+  Copy current config.guess/config.sub from pristine SDL into extracted libmad
+  and libmpeg2 build trees; upstream dependency tarballs and libsdl unchanged.
+- Restarted aarch64 build with corrected detection helpers.

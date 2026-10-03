@@ -6,7 +6,7 @@
 
 Name: %{_app_orgname}.%{_app_appname}
 Version: 2026.3.1
-Release: 3
+Release: 5
 Summary: ScummVM adventure game interpreter
 License: GPLv3+
 Group: Amusements/Games
@@ -59,6 +59,8 @@ cmake --install build/%{_arch}/libsdl
 mkdir -p build/%{_arch}/mad
 if [ ! -f build/%{_arch}/mad-install/lib/libmad.a ] || ! grep -q -- '-O2' build/%{_arch}/mad/Makefile; then
 tar xf aurora/deps/libmad-0.15.1b.tar.gz -C build/%{_arch}/mad --strip-components=1
+# The original Autotools helpers predate aarch64. Use SDL's current helpers.
+cp libsdl/build-scripts/config.guess libsdl/build-scripts/config.sub build/%{_arch}/mad/
 pushd build/%{_arch}/mad
 sed -i 's/-fforce-mem//g' configure
 CFLAGS="%{optflags} -O2" ./configure --prefix="$PWD/../mad-install" --disable-shared --enable-static --disable-aso
@@ -70,6 +72,7 @@ fi
 if [ ! -f build/%{_arch}/mpeg2-install/lib/libmpeg2.a ]; then
 mkdir -p build/%{_arch}/mpeg2
 tar xf aurora/deps/libmpeg2-0.5.1.tar.gz -C build/%{_arch}/mpeg2 --strip-components=1
+cp libsdl/build-scripts/config.guess libsdl/build-scripts/config.sub build/%{_arch}/mpeg2/.auto/
 pushd build/%{_arch}/mpeg2
 ./configure --prefix="$PWD/../mpeg2-install" --disable-shared --enable-static --disable-sdl
 make -j8
@@ -117,7 +120,7 @@ for lib in libFLAC.so.12 libfreetype.so.6 libfribidi.so.0 libjpeg.so.62 libtheor
   patchelf --force-rpath --set-rpath %{_datadir}/%{name}/lib %{buildroot}%{_datadir}/%{name}/lib/$lib
 done
 for size in 86 108 128 172; do
-  install -D -m0644 dists/sailfish/${size}x${size}.png %{buildroot}%{_datadir}/icons/hicolor/${size}x${size}/apps/%{name}.png
+  install -D -m0644 aurora/icon_${size}.png %{buildroot}%{_datadir}/icons/hicolor/${size}x${size}/apps/%{name}.png
 done
 install -D -m0644 aurora/%{name}.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
 
@@ -129,6 +132,10 @@ install -D -m0644 aurora/%{name}.desktop %{buildroot}%{_datadir}/applications/%{
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Sun Oct 04 2026 erhoof <erhoof@localhost> - 2026.3.1-5
+- Update launcher icons and dependency architecture detection for aarch64.
+* Sun Oct 04 2026 erhoof <erhoof@localhost> - 2026.3.1-4
+- Install user-supplied ScummVM launcher icons in all Aurora sizes.
 * Sun Oct 04 2026 erhoof <erhoof@localhost> - 2026.3.1-3
 - Use inverse quarter turns for the Wayland buffer rotation hint.
 * Sun Oct 04 2026 erhoof <erhoof@localhost> - 2026.3.1-2

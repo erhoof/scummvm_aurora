@@ -1,9 +1,10 @@
 # Aurora ScummVM
 
-Build, sign and validate the armv7hl package:
+Build, sign and validate either architecture:
 
 ```sh
 ./build_sign.sh armv7hl --sign
+./build_sign.sh aarch64 --sign
 ```
 
 Add `--deploy` to install on defaultuser@192.168.1.247. Defaults are in

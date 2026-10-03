@@ -1,6 +1,6 @@
 # ScummVM Aurora port
 
-Mode: auto. Target: AuroraOS-5.2.1.200 armv7hl. App: ru.erhoof.scummvm.
+Mode: auto. Targets: AuroraOS-5.2.1.200 armv7hl and aarch64. App: ru.erhoof.scummvm.
 
 ## Research
 
@@ -33,3 +33,9 @@ Russian release. Copied to `~/Documents/PILOTS`; use that directory for gameplay
 ## Open device findings
 
 [ROT-002](port_errors.md): image correct, inverse compositor hint fixed in release 3; awaiting confirmation.
+
+## Release 5 icons / architecture builds
+
+Revised icons from Untitled (56).zip installed in all four sizes. Previous
+release 4 armv7hl signed, validated and deployed. Release 5 aarch64 building
+with refreshed Autotools architecture helpers; armv7hl rebuild/deploy follows.
