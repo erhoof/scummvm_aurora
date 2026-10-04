@@ -6,7 +6,7 @@
 
 Name: %{_app_orgname}.%{_app_appname}
 Version: 2026.3.1
-Release: 5
+Release: 6
 Summary: ScummVM adventure game interpreter
 License: GPLv3+
 Group: Amusements/Games
@@ -132,6 +132,8 @@ install -D -m0644 aurora/%{name}.desktop %{buildroot}%{_datadir}/applications/%{
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Sun Oct 04 2026 erhoof <erhoof@localhost> - 2026.3.1-6
+- Add four-finger main-menu gesture and enlarge the virtual keyboard for touch.
 * Sun Oct 04 2026 erhoof <erhoof@localhost> - 2026.3.1-5
 - Update launcher icons and dependency architecture detection for aarch64.
 * Sun Oct 04 2026 erhoof <erhoof@localhost> - 2026.3.1-4

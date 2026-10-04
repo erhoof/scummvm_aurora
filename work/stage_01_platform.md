@@ -117,3 +117,26 @@
   defaultuser@192.168.1.247; sdk-deploy-rpm reports Installation successful.
 - Final revised icons from Untitled (56).zip included in both packages.
 - aarch64 device execution not tested: supplied tablet has armv7hl userspace.
+
+## Release 6 — touch menu and larger virtual keyboard
+
+- Added Aurora-only four-finger tap -> EVENT_MAINMENU, preserving three-finger
+  tap -> virtual keyboard and existing one/two-finger click/drag behavior.
+  SDL touch tracking increased from three to four fingers only under AURORA_OS.
+- Scale all virtual keyboard mode bitmaps toward 90% overlay width, with a
+  75% overlay height cap. Scale rectangular/polygonal key hit maps and display
+  area with matching dimensions; reload layout on overlay size changes.
+- Latest official Android controls differ from user's gesture list: menu icon
+  or system buttons open menu, controller icon opens keyboard. Android's Java
+  gesture backend is separate from this SDL backend.
+- armv7hl build/sign/check/deploy running; aarch64 rebuild follows.
+
+Release 6 completion: armv7hl and aarch64 build, signature verification and
+regular validation succeeded. Signed RPMs preserved in artifacts/. armv7hl
+installer reported Installation successful. Asked user to verify four-finger
+menu tap and enlarged keyboard touch alignment; feedback pending.
+
+User asks why Pilot Brothers' return-to-launcher button is disabled. Source
+confirms engines/dialogs.cpp enables it only for kSupportsReturnToLauncher;
+Gamos has no hasFeature override, so Engine's default false applies. This is
+an existing engine capability limitation; no game logic was changed.

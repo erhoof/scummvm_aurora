@@ -146,10 +146,16 @@ bool VirtualKeyboardParser::parserCallback_mode(ParserNode *node) {
 		return parserError("No acceptable resolution was found");
 
 	if (_parseMode == kParseCheckResolutions) {
+#ifndef AURORA_OS
 		if (_mode->resolution == newResolution) {
 			node->ignore = true;
 			return true;
 		} else {
+#else
+		// The bitmap size depends on the overlay, even when the selected
+		// pack resolution stays the same after changing displays.
+		{
+#endif
 			// remove data relating to old resolution
 			_mode->bitmapName.clear();
 			if (_mode->image) {
@@ -275,6 +281,26 @@ bool VirtualKeyboardParser::parserCallback_layout(ParserNode *node) {
 
 	delete file;
 
+#ifdef AURORA_OS
+	// Grow the keyboard for touch use, keeping its aspect ratio and leaving
+	// some of the game visible. Scale key hit areas with the same dimensions.
+	_auroraSourceWidth = _mode->image->w;
+	_auroraSourceHeight = _mode->image->h;
+	_auroraTargetWidth = MAX(1, g_system->getOverlayWidth() * 9 / 10);
+	_auroraTargetHeight = MAX(1, _auroraSourceHeight * _auroraTargetWidth / _auroraSourceWidth);
+	const int maxHeight = MAX(1, g_system->getOverlayHeight() * 3 / 4);
+	if (_auroraTargetHeight > maxHeight) {
+		_auroraTargetHeight = maxHeight;
+		_auroraTargetWidth = MAX(1, _auroraSourceWidth * maxHeight / _auroraSourceHeight);
+	}
+	if (_auroraTargetWidth != _auroraSourceWidth || _auroraTargetHeight != _auroraSourceHeight) {
+		Graphics::Surface *source = _mode->image;
+		_mode->image = source->scale(_auroraTargetWidth, _auroraTargetHeight);
+		source->free();
+		delete source;
+	}
+#endif
+
 	int r, g, b;
 	if (node->values.contains("transparent_color")) {
 		if (!parseIntegerKey(node->values["transparent_color"], 3, &r, &g, &b))
@@ -351,6 +377,12 @@ bool VirtualKeyboardParser::parseRect(Rect &rect, const String &coords) {
 	int x1, y1, x2, y2;
 	if (!parseIntegerKey(coords, 4, &x1, &y1, &x2, &y2))
 		return parserError("Invalid coords for rect area");
+#ifdef AURORA_OS
+	x1 = x1 * _auroraTargetWidth / _auroraSourceWidth;
+	x2 = x2 * _auroraTargetWidth / _auroraSourceWidth;
+	y1 = y1 * _auroraTargetHeight / _auroraSourceHeight;
+	y2 = y2 * _auroraTargetHeight / _auroraSourceHeight;
+#endif
 	rect.left = x1;
 	rect.top = y1;
 	rect.right = x2;
@@ -369,6 +401,10 @@ bool VirtualKeyboardParser::parsePolygon(Polygon &poly, const String &coords) {
 		st = tok.nextToken();
 		if (sscanf(st.c_str(), "%d", &y) != 1)
 			return parserError("Invalid coords for polygon area");
+#ifdef AURORA_OS
+		x = x * _auroraTargetWidth / _auroraSourceWidth;
+		y = y * _auroraTargetHeight / _auroraSourceHeight;
+#endif
 		poly.addPoint(x, y);
 	}
 	if (poly.getPointCount() < 3)

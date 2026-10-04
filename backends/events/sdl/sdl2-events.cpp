@@ -450,6 +450,13 @@ bool SdlEventSource::preprocessFingerUp(SDL_Event *event, Common::Event *ev) {
 					float yrel = ((event->tfinger.y * (float) touchscreenSize.y) - (_touchPanels[port]._finger[i].lastDownY * (float) touchscreenSize.y));
 					float maxRSquared = (float) (MAX_TAP_MOTION_DISTANCE * MAX_TAP_MOTION_DISTANCE);
 					if ((xrel * xrel + yrel * yrel) < maxRSquared) {
+#ifdef AURORA_OS
+						if (numFingersDown == 4) {
+							_touchPanels[port]._tapMade = true;
+							ev->type = Common::EVENT_MAINMENU;
+							return true;
+						}
+#endif
 						if (numFingersDown == 3) {
 							_touchPanels[port]._tapMade = true;
 							ev->type = Common::EVENT_VIRTUAL_KEYBOARD;

@@ -15,3 +15,6 @@ ScummVM 90° -> Wayland 270°). Texture and touch mappings remain unchanged.
 Release 3 prepared. Status: awaiting tablet confirmation.
 
 ROT-001 image correction confirmed by user; closed.
+
+ROT-002: closed following user's overall positive feedback after release 5
+("Looks like everything is good"). No further rotation fault reported.

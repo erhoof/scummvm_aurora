@@ -46,5 +46,10 @@ the app card removes the process and permits a fresh launch. Device visual
 checks are performed by the user; screenshots require root on this tablet.
 
 Touch shortcuts: a quick three-finger tap opens ScummVM's bundled virtual
-keyboard (confirmed on tablet). To open the main menu, use Ctrl+F5 on that
-keyboard. This SDL backend has no dedicated touch gesture for the menu.
+keyboard (confirmed on tablet). A quick four-finger tap opens the main menu.
+Ctrl+F5 remains available on the keyboard. On Aurora the virtual keyboard scales
+toward 90% of the overlay width, capped at 75% height, with matching touch areas.
+
+Pilot Brothers' Gamos engine does not advertise return-to-launcher support,
+so the main menu's Return to Launcher button is disabled by ScummVM. Use Quit
+and reopen ScummVM to select another game.

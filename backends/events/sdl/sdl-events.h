@@ -254,7 +254,11 @@ protected:
 	Common::Event _fakeMouseScroll;
 
 	enum {
+#ifdef AURORA_OS
+		MAX_NUM_FINGERS = 4, // four-finger tap opens the main menu
+#else
 		MAX_NUM_FINGERS = 3, // number of fingers to track per panel
+#endif
 		MAX_TAP_TIME = 250, // taps longer than this will not result in mouse click events
 		MAX_TAP_MOTION_DISTANCE = 10, // max distance finger motion in Vita screen pixels to be considered a tap
 		SIMULATED_CLICK_DURATION = 50, // time in ms how long simulated mouse clicks should be

@@ -19,7 +19,7 @@ See [render pipeline](research/render_pipeline.md). Existing GLES texture rotati
 
 Tablet reachable. Aurora 5.2.0.180, armv7hl userspace; glibc 2.38 matches SDK.
 Both editions copied to Documents. Release 1 launched successfully; release 2 image rotation confirmed correct.
-Release 3 corrects the inverse Wayland hint; awaiting tablet confirmation.
+Release 3 corrected the inverse Wayland hint. User subsequently reported everything looks good.
 Generic rpmlint reports private-library layout advisories; Aurora regular validator
 returns success with only the non-Silica desktop warning.
 
@@ -32,7 +32,8 @@ Russian release. Copied to `~/Documents/PILOTS`; use that directory for gameplay
 
 ## Open device findings
 
-[ROT-002](port_errors.md): image correct, inverse compositor hint fixed in release 3; awaiting confirmation.
+No remaining reported rotation faults; user reports everything looks good.
+Release 6 menu gesture and keyboard scaling await device feedback.
 
 ## Release 5 icons / architecture builds
 
@@ -40,4 +41,12 @@ Revised icons from Untitled (56).zip installed in all four sizes. Previous
 release 4 armv7hl signed, validated and deployed. Release 5 aarch64 signed and validated, preserved in artifacts/.
 Release 5 armv7hl signed, validated and installed successfully. Both RPMs
 are preserved in artifacts/. Virtual keyboard three-finger gesture confirmed
-by user; main menu uses Ctrl+F5. Rotation hint/audio close still await user feedback.
+by user; main menu uses Ctrl+F5. User reports the port looks good overall; audio/card-close behavior has not
+been separately recorded as confirmed.
+
+## Release 6 touch improvements
+
+Four-finger menu gesture and enlarged virtual keyboard implemented. Existing
+three-finger keyboard gesture preserved. Both release 6 RPMs built, signed and
+validated, preserved in artifacts/. armv7hl installed successfully on tablet.
+New menu gesture/keyboard size require device feedback.

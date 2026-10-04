@@ -243,6 +243,10 @@ protected:
 	String _initialModeName;
 	bool _kbdParsed;
 	bool _layoutParsed;
+#ifdef AURORA_OS
+	int _auroraSourceWidth, _auroraSourceHeight;
+	int _auroraTargetWidth, _auroraTargetHeight;
+#endif
 
 	/** Cleanup internal state before parse */
 	virtual void cleanup();
