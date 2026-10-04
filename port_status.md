@@ -49,4 +49,11 @@ been separately recorded as confirmed.
 Four-finger menu gesture and enlarged virtual keyboard implemented. Existing
 three-finger keyboard gesture preserved. Both release 6 RPMs built, signed and
 validated, preserved in artifacts/. armv7hl installed successfully on tablet.
-New menu gesture/keyboard size require device feedback.
+User confirms armv7hl release 6 works.
+
+## aarch64 device deployment
+
+Release 6 installed successfully on defaultuser@192.168.1.133 (aarch64, 64-bit
+userspace, glibc 2.38). Original Pilot Brothers copied to ~/Documents/PILOTS
+and added with --add --game=gamos:pilots1. --list-targets confirms pilots1-win-ru.
+CLI runtime verified on aarch64; graphics/gameplay await device use.

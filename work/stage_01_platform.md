@@ -140,3 +140,15 @@ User asks why Pilot Brothers' return-to-launcher button is disabled. Source
 confirms engines/dialogs.cpp enables it only for kSupportsReturnToLauncher;
 Gamos has no hasFeature override, so Engine's default false applies. This is
 an existing engine capability limitation; no game logic was changed.
+
+## aarch64 device 192.168.1.133
+
+- User confirms armv7hl release 6 works; requests aarch64 deployment and Pilot
+  Brothers copy/add on second device. Existing signed/validated release 6 used.
+- SSH key id_rsa_no_key; defaultuser. Device reports aarch64, 64-bit userspace
+  and glibc 2.38, compatible with the SDK build.
+- Copied signed RPM and original Russian PILOTS data by scp.
+- sdk-deploy-rpm --silent --keepUserData reports Installation successful.
+- Executed --add --game=gamos:pilots1 --path=~/Documents/PILOTS. Added 1 game,
+  target pilots1-win-ru, Russian/Windows original. --list-targets confirms entry.
+- First-run missing scummvm.ini message is expected; configuration created.
