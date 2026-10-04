@@ -325,3 +325,12 @@ CLAUDE.md
 /documentation.list
 /work/*.log
 !/build_sign.sh
+
+# Local Aurora port notes and machine-specific configuration
+/port_config.json
+/port_status.md
+/port_errors.md
+/research/
+/work/*.md
+/aurora/*.md
+/aurora/deps/*.md
